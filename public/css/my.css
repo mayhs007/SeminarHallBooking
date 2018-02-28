@@ -1,0 +1,111 @@
+nav {
+    background-color: transparent;
+    -webkit-box-shadow: 0 0px;
+    box-shadow: 0 0px;
+}
+
+.nav-warapper {
+    opacity: 0.2;
+}
+
+nav ul li a {
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+    font-size: 1rem;
+    color: #fff;
+    display: block;
+    padding: 0 15px;
+    cursor: pointer
+}
+
+#image1 #image2 {
+    position: relative;
+}
+
+#image1 #image2:hover>div {
+    opacity: 1;
+}
+
+#image1 #image2>div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    -webkit-transition: opacity 400ms;
+    -o-transition: opacity 400ms;
+    transition: opacity 400ms;
+}
+
+#image1 #image2>div>ul {
+    list-style: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#image1 #image2>div>ul.divide>li.workshop {
+    width: 50%;
+    height: 100%;
+}
+
+#image1 #image2>div>ul.divide>li.event {
+    width: 50%;
+    height: 100%;
+}
+
+#image1 #image2>div>ul li {
+    display: block;
+    float: left;
+    text-align: center;
+}
+
+#image1 #image2>div>ul li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+}
+
+#image1 #image2>div>ul li a.CIVILWORK {
+    background: rgba(247, 198, 0, 0.616);
+}
+
+#image1 #image2>div>ul li a.CIVILWORK:hover {
+    background: rgba(247, 198, 0, 0.616);
+}
+
+#image1 #image2>div>ul li a.CIVILEVENT {
+    background: rgba(203, 160, 129, 0.616);
+}
+
+#image1 #image2>div>ul li a.CIVILEVENT:hover {
+    background: rgba(203, 160, 129, 0.616);
+    ;
+}
+
+#image1 #image2>div>ul li a>i {
+    font-size: 30px;
+    line-height: 1;
+    position: relative;
+    top: 40%;
+    color: black;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#imagebackground #imagebackground2 {
+    position: relative;
+}
+
+#imagebackground #imagebackground2>div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
