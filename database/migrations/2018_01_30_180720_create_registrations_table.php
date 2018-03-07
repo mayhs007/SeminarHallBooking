@@ -18,7 +18,7 @@ class CreateRegistrationsTable extends Migration
             $table->integer('event_id');
             $table->integer('hall_id');
             $table->integer('club_id');
-            $table->boolean('a/c');
+            $table->boolean('ac');
             $table->boolean('podium_mike');
             $table->boolean('video_projector');
             $table->boolean('mike_with_card');
@@ -28,6 +28,7 @@ class CreateRegistrationsTable extends Migration
             $table->date('date_of_event');
             $table->time('start_time');
             $table->time('end_time');
+            $table->enum('status', ['Waiting', 'Rejected','Registered']);
             $table->timestamps();
         });
     }

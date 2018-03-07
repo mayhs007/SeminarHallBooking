@@ -11,14 +11,20 @@
 |
 */
 Route::group(['middleware' => 'auth.redirect_admin'], function(){
-    Route::get( '/', ['as' => 'user_pages.home', 'uses' => 'PagesController@home'])->middleware('guest');
+    Route::get( '/', ['as' => 'user_pages.root', 'uses' => 'PagesController@root']);
     Route::get('home', ['as' => 'user_pages.home', 'uses' => 'PagesController@home']);
     Route::get('hall', ['as' => 'user_pages.hall', 'uses' => 'PagesController@hall']);
     Route::get('book', ['as' => 'user_pages.book', 'uses' => 'PagesController@book']);
     Route::group(['prefix' => 'book'], function(){
         Route::post('register', ['as' => 'user_pages.register', 'uses' => 'PagesController@register']);
         Route::get('register', ['as' => 'user_pages.register', 'uses' => 'PagesController@register']);
+     
     });
+    Route::get('bookings', ['as' => 'user_pages.bookings', 'uses' => 'PagesController@bookings']);
+    Route::post('bookings', ['as' => 'user_pages.bookings', 'uses' => 'PagesController@bookings']);
+    Route::post('unregister', ['as' => 'user_pages.unregister', 'uses' => 'PagesController@unregister']);
+    Route::get('unregister', ['as' => 'user_pages.unregister', 'uses' => 'PagesController@unregister']);
+    
 
 
 });

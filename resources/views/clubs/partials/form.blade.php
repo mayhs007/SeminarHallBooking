@@ -1,6 +1,10 @@
 <div class="input-field">
-    {!! Form::label('club_name') !!}
-    {!! Form::text('club_name') !!}                                           
+    {!! Form::label('name') !!}
+    {!! Form::text('name') !!}                                           
+</div>
+<div class="input-field">
+    {!! Form::label('staff_incharge') !!}
+    {!! Form::text('staff_incharge') !!}                                           
 </div>
 <div class="input-field">
     {!! Form::submit('Submit', ['class' => 'btn green waves-effect waves-light']) !!}

@@ -15,6 +15,7 @@
 <body>
 @include('layouts.partials.admin_nav')
 @include('layouts.partials.flash')
+<br>
 <div class="container">
 @yield('content')
 </div>

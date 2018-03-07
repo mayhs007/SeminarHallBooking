@@ -17,6 +17,7 @@ class CreateClubsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('staff_incharge');
+            $table->timestamps();
         });
     }
 

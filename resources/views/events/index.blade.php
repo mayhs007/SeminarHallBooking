@@ -16,7 +16,7 @@
             <li class="collection-header center-align"><h4>Events</h4></li>
             @foreach($events as $events)
                 <li class="collection-item">
-                    {{ $events->event_name }}
+                    {{ $events->name }}
                     <div class="span right">
                         <a href="{{ route('admin::events.edit', ['id' => $events->id]) }}"><i class="fa fa-pencil"></i> Edit</a>
                         {!! Form::open(['url' => route('admin::events.destroy', ['id' => $events->id]), 'method' => 'DELETE', 'style' => 'display:inline', 'id' => 'frm-delete-events']) !!}

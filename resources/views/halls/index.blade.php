@@ -16,7 +16,7 @@
             <li class="collection-header center-align"><h4>Halls</h4></li>
             @foreach($halls as $halls)
                 <li class="collection-item">
-                    {{ $halls->hall_name }}
+                    {{ $halls->name }}
                     <div class="span right">
                         <a href="{{ route('admin::halls.edit', ['id' => $halls->id]) }}"><i class="fa fa-pencil"></i> Edit</a>
                         {!! Form::open(['url' => route('admin::halls.destroy', ['id' => $halls->id]), 'method' => 'DELETE', 'style' => 'display:inline', 'id' => 'frm-delete-halls']) !!}

@@ -9,11 +9,11 @@
         <div class="indeterminate"></div>
     </div>
     <div class="card-image waves-effect waves-light waves-block">
-        <img src="{{ $hall->getImageUrl() }}" alt="{{ $hall->hall_name }} image" class="activator">
-    </div>
+    <img src="{{ url($hall->getImageUrl()) }}" alt="{{ $hall->name }}" class="activator">
+</div>
     <div class="card-content">
         <span class="card-title activator">
-            {{ $hall->hall_name }}
+            {{ $hall->name }}
             <i class="material-icons right activator">more_vert</i>            
         </span>
         <a href="{{route('user_pages.book', ['hall_id' => $hall->id])}}">BOOK</a>
@@ -21,7 +21,8 @@
     <div class="card-reveal">   
     <span class="card-title">
             <i class="material-icons right">close</i>                    
-            {{ $hall->hall_name }} 
+            {{ $hall->name }} 
+            {{$hall->ac}}
         </span>
     </div>
 </div>

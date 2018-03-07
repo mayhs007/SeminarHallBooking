@@ -36,13 +36,8 @@ class ClubsController extends Controller
     }
     public function destroy($club_id){
         $club = Club::find($club_id);
-        if($club->users->count() > 0){
-            Session::flash('success', "The club has registered users and can't be deleted!");
-        }
-        else{
             Club::destroy($club_id);
             Session::flash('success', "Club was deleted!");            
-        }
         return redirect()->back();         
     }
 }

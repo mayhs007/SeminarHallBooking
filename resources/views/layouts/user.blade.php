@@ -19,6 +19,7 @@
 <body>
 @include('layouts.partials.user_nav')
 @include('layouts.partials.flash')
+<br>
 @yield('content')
 </body>
 </html>

@@ -18,6 +18,7 @@
 <body>
 @include('layouts.partials.auth_nav')
 @include('layouts.partials.flash')
+<br>
 @yield('content')
 
 </body>

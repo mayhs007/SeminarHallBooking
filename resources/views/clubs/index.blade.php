@@ -16,7 +16,7 @@
             <li class="collection-header center-align"><h4>Clubs</h4></li>
             @foreach($clubs as $clubs)
                 <li class="collection-item">
-                    {{ $clubs->club_name }}
+                    {{ $clubs->name }}
                     <div class="span right">
                         <a href="{{ route('admin::clubs.edit', ['id' => $clubs->id]) }}"><i class="fa fa-pencil"></i> Edit</a>
                         {!! Form::open(['url' => route('admin::clubs.destroy', ['id' => $clubs->id]), 'method' => 'DELETE', 'style' => 'display:inline', 'id' => 'frm-delete-clubs']) !!}
@@ -28,12 +28,10 @@
         </ul>
     </div>
 </div>
-
 <script>
     $('body').on('click', 'a.btn-delete-clubs', function(evt){
         evt.preventDefault();
         $(this).parent('#frm-delete-clubs').submit();
     });
 </script>
-
 @endsection

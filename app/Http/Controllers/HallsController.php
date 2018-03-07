@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use App\Hall;
+use App\User;
 
 class HallsController extends Controller
 {
@@ -18,7 +19,7 @@ class HallsController extends Controller
         return view('halls.create')->with('hall', $hall);
     }
     public function store(Request $request){
-        $inputs = $request->all();
+        $input = $request->all();
         // Upload file
         if(!empty($request->file('event_image'))){
             $filename = $request->file('event_image')->getClientOriginalName();
@@ -26,8 +27,12 @@ class HallsController extends Controller
             // Set image name
             $input['image'] = $filename;    
         }
-        Hall::create($inputs);
-        Session::flash('success', 'Hall was added!');
+        // Create event record    
+        $event = Hall::create($input);
+        // Add organizers
+       
+        // Set flash message
+        Session::flash('success', 'The Hall was created successfully!');
         return redirect()->route('admin::halls.create');
     }
     public function edit($hall_id){
@@ -43,13 +48,10 @@ class HallsController extends Controller
     }
     public function destroy($hall_id){
         $hall = Hall::find($hall_id);
-        if($hall->users->count() > 0){
-            Session::flash('success', "The hall has registered users and can't be deleted!");
-        }
-        else{
+       
             Hall::destroy($hall_id);
             Session::flash('success', "Hall was deleted!");            
-        }
+    
         return redirect()->back();         
     }
 }

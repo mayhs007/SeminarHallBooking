@@ -11,53 +11,53 @@
     {!! Form::text('location') !!}                                           
 </div>
 <div class="row">
-{!! Form::label('A/C') !!}
-{!! Form::radio('A/C',1,true,['class' => 'with-gap', 'id' => 'A/C-yes'] ) !!}
-{!! Form::label('A/C-yes', 'Available') !!}
-{!! Form::radio('A/C',0,false,['class' => 'with-gap', 'id' => 'A/C-no'] ) !!}
-{!! Form::label('A/C-no', 'Not Available') !!}
+{!! Form::label('ac') !!}
+{!! Form::radio('ac',1,true,['class' => 'with-gap', 'id' => 'ac-yes'] ) !!}
+{!! Form::label('ac-yes', 'Available') !!}
+{!! Form::radio('ac',0,false,['class' => 'with-gap', 'id' => 'ac-no'] ) !!}
+{!! Form::label('ac-no', 'Not Available') !!}
 </div>
 <div class="row">
-{!! Form::label('Podium_mike') !!}
-{!! Form::radio('Podium_mike',1,true,['class' => 'with-gap', 'id' => 'Podium_mike-yes'] ) !!}
-{!! Form::label('Podium_mike-yes', 'Available') !!}
-{!! Form::radio('Podium_mike',0,false,['class' => 'with-gap', 'id' => 'Podium_mike-no'] ) !!}
-{!! Form::label('Podium_mike-no', 'Not Available') !!}
+{!! Form::label('podium_mike') !!}
+{!! Form::radio('podium_mike',1,true,['class' => 'with-gap', 'id' => 'podium_mike-yes'] ) !!}
+{!! Form::label('podium_mike-yes', 'Available') !!}
+{!! Form::radio('podium_mike',0,false,['class' => 'with-gap', 'id' => 'podium_mike-no'] ) !!}
+{!! Form::label('podium_mike-no', 'Not Available') !!}
 </div>
 <div class="row">
-{!! Form::label('Video_Projector') !!}
-{!! Form::radio('Video_Projector',1,true,['class' => 'with-gap', 'id' => 'Video_Projector-yes'] ) !!}
-{!! Form::label('Video_Projector-yes', 'Available') !!}
-{!! Form::radio('Video_Projector',0,false,['class' => 'with-gap', 'id' => 'Video_Projector-no'] ) !!}
-{!! Form::label('Video_Projector-no', 'Not Available') !!}
+{!! Form::label('video_projector') !!}
+{!! Form::radio('video_projector',1,true,['class' => 'with-gap', 'id' => 'video_projector-yes'] ) !!}
+{!! Form::label('video_projector-yes', 'Available') !!}
+{!! Form::radio('video_projector',0,false,['class' => 'with-gap', 'id' => 'video_projector-no'] ) !!}
+{!! Form::label('video_projector-no', 'Not Available') !!}
 </div>
 <div class="row">
-{!! Form::label('Mike_With_Card') !!}
-{!! Form::radio('Mike_With_Card',1,true,['class' => 'with-gap', 'id' => 'Mike_With_Card-yes'] ) !!}
-{!! Form::label('Mike_With_Card-yes', 'Available') !!}
-{!! Form::radio('Mike_With_Card',0,false,['class' => 'with-gap', 'id' => 'Mike_With_Card-no'] ) !!}
-{!! Form::label('Mike_With_Card-no', 'Not Available') !!}
+{!! Form::label('mike_with_card') !!}
+{!! Form::radio('mike_with_card',1,true,['class' => 'with-gap', 'id' => 'mike_with_card-yes'] ) !!}
+{!! Form::label('mike_with_card-yes', 'Available') !!}
+{!! Form::radio('mike_with_card',0,false,['class' => 'with-gap', 'id' => 'mike_with_card-no'] ) !!}
+{!! Form::label('mike_with_card-no', 'Not Available') !!}
 </div>
 <div class="row">
-{!! Form::label('Cordless_Hand_Mike') !!}
-{!! Form::radio('Cordless_Hand_Mike',1,true,['class' => 'with-gap', 'id' => 'Cordless_Hand_Mike-yes'] ) !!}
-{!! Form::label('Cordless_Hand_Mike-yes', 'Available') !!}
-{!! Form::radio('Cordless_Hand_Mike',0,false,['class' => 'with-gap', 'id' => 'Cordless_Hand_Mike-no'] ) !!}
-{!! Form::label('Cordless_Hand_Mike-no', 'Not Available') !!}
+{!! Form::label('cordless_hand_mike') !!}
+{!! Form::radio('cordless_hand_mike',1,true,['class' => 'with-gap', 'id' => 'cordless_hand_mike-yes'] ) !!}
+{!! Form::label('cordless_hand_mike-yes', 'Available') !!}
+{!! Form::radio('cordless_hand_mike',0,false,['class' => 'with-gap', 'id' => 'cordless_hand_mike-no'] ) !!}
+{!! Form::label('cordless_hand_mike-no', 'Not Available') !!}
 </div>
 <div class="row">
-{!! Form::label('Cordless_Collar_Mike') !!}
-{!! Form::radio('Cordless_Collar_Mike',1,true,['class' => 'with-gap', 'id' => 'Cordless_Collar_Mike-yes'] ) !!}
-{!! Form::label('Cordless_Collar_Mike-yes', 'Available') !!}
-{!! Form::radio('Cordless_Collar_Mike',0,false,['class' => 'with-gap', 'id' => 'Cordless_Collar_Mike-no'] ) !!}
-{!! Form::label('Cordless_Collar_Mike-no', 'Not Available') !!}
+{!! Form::label('cordless_collar_mike') !!}
+{!! Form::radio('cordless_collar_mike',1,true,['class' => 'with-gap', 'id' => 'cordless_collar_mike-yes'] ) !!}
+{!! Form::label('cordless_collar_mike-yes', 'Available') !!}
+{!! Form::radio('cordless_collar_mike',0,false,['class' => 'with-gap', 'id' => 'cordless_collar_mike-no'] ) !!}
+{!! Form::label('cordless_collar_mike-no', 'Not Available') !!}
 </div>
 <div class="row">
-{!! Form::label('Laser_Pointer') !!}
-{!! Form::radio('Laser_Pointer',1,true,['class' => 'with-gap', 'id' => 'Laser_Pointer-yes'] ) !!}
-{!! Form::label('Laser_Pointer-yes', 'Available') !!}
-{!! Form::radio('Laser_Pointer',0,false,['class' => 'with-gap', 'id' => 'Laser_Pointer-no'] ) !!}
-{!! Form::label('Laser_Pointer-no', 'Not Available') !!}
+{!! Form::label('laser_pointer') !!}
+{!! Form::radio('laser_pointer',1,true,['class' => 'with-gap', 'id' => 'laser_pointer-yes'] ) !!}
+{!! Form::label('laser_pointer-yes', 'Available') !!}
+{!! Form::radio('laser_pointer',0,false,['class' => 'with-gap', 'id' => 'laser_pointer-no'] ) !!}
+{!! Form::label('laser_pointer-no', 'Not Available') !!}
 </div>
 <div class="row">
         {!! Form::label('event_image') !!}    
@@ -65,7 +65,7 @@
             <div class="btn">
                 <span>Browse</span>
                 {!! Form::file('event_image') !!}
-                {!! Form::hidden('image_name') !!}
+                {!! Form::hidden('image') !!}
             </div>
             <div class="file-path-wrapper">
                 <input type="text" class="file-path" placeholder="Browse a image file of type jpeg,png"> 
