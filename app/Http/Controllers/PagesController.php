@@ -90,7 +90,15 @@ class PagesController extends Controller
         $registration->hall_id=$inputs['hall_id'];
         $registration->club_id=$inputs['club_id'];
         $registration->event_id=$inputs['event_id'];
-        $registration->ac=$inputs['ac'];
+        if(isset($_POST['ac']))
+        {
+            $registration->ac=$inputs['ac'];
+        }    
+        else
+        {
+            $registration->ac=false;
+        }
+       
         if(isset($_POST['podium_mike']))
         {
             $registration->podium_mike=$inputs['podium_mike'];
@@ -99,12 +107,46 @@ class PagesController extends Controller
         {
             $registration->podium_mike=false;
         }
-        //$registration->podium_mike=$inputs['podium_mike'];
-        $registration->video_projector=$inputs['video_projector'];
-        $registration->mike_with_card=$inputs['mike_with_card'];
-        $registration->cordless_hand_mike=$inputs['cordless_hand_mike'];
-        $registration->cordless_collar_mike=$inputs['cordless_collar_mike'];
-        $registration->laser_pointer=$inputs['laser_pointer'];
+        if(isset($_POST['video_projector']))
+        {
+            $registration->video_projector=$inputs['video_projector'];
+        }    
+        else
+        {
+            $registration->video_projector=false;
+        }
+        if(isset($_POST['mike_with_card']))
+        {
+            $registration->mike_with_card=$inputs['mike_with_card'];
+        }    
+        else
+        {
+            $registration->mike_with_card=false;
+        }
+        if(isset($_POST['cordless_hand_mike']))
+        {
+            $registration->cordless_hand_mike=$inputs['cordless_hand_mike'];
+        }    
+        else
+        {
+            $registration->cordless_hand_mike=false;
+        }
+        if(isset($_POST['cordless_collar_mike']))
+        {
+            $registration->cordless_collar_mike=$inputs['cordless_collar_mike'];
+        }    
+        else
+        {
+            $registration->cordless_collar_mike=false;
+        }
+        if(isset($_POST['laser_pointer']))
+        {
+            $registration->laser_pointer=$inputs['laser_pointer'];
+        }    
+        else
+        {
+            $registration->laser_pointer=false;
+        }
         $registration->date_of_event=$date;
         $registration->start_time=$inputs['start_time'];
         $registration->end_time=$inputs['end_time'];
