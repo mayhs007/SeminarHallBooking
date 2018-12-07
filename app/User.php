@@ -21,12 +21,19 @@ class User extends Authenticatable
     function clubs(){
         return $this->hasOne('App\Club');
     }
+    function registration()
+    {
+        return $this->hasMany('App\Registration');
+    }
     function hasRole($role_name){
         if($this->roles()->where('role_name', $role_name)->count()){
             return true;
         }
         return false;
    }
+   function organizings(){
+    return $this->belongsToMany('App\Hall', 'incharges');
+}
  
     
 }

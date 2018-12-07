@@ -24,6 +24,12 @@ Route::group(['middleware' => 'auth.redirect_admin'], function(){
     Route::post('bookings', ['as' => 'user_pages.bookings', 'uses' => 'PagesController@bookings']);
     Route::post('unregister', ['as' => 'user_pages.unregister', 'uses' => 'PagesController@unregister']);
     Route::get('unregister', ['as' => 'user_pages.unregister', 'uses' => 'PagesController@unregister']);
+    Route::post('register_edit', ['as' => 'user_pages.register_edit', 'uses' => 'PagesController@register_edit']);
+    Route::get('register_edit', ['as' => 'user_pages.register_edit', 'uses' => 'PagesController@register_edit']);
+    Route::post('suggestions', ['as' => 'user_pages.suggestion', 'uses' => 'PagesController@suggestion']);
+    Route::get('suggestions', ['as' => 'user_pages.suggestion', 'uses' => 'PagesController@suggestion']);
+    Route::post('registration', ['as' => 'user_pages.registration', 'uses' => 'PagesController@registration']);
+    Route::get('registration', ['as' => 'user_pages.registration', 'uses' => 'PagesController@registration']);
     
 
 
@@ -41,7 +47,10 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function(){
     Route::post('register', 'RegisterController@register');
     Route::get('change-password', ['as' => 'auth.changePassword', 'uses' => 'PasswordController@showChangePassword']);
     Route::post('change-password', ['uses' => 'PasswordController@changePassword']);
-    
+    Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset', 'ResetPasswordController@reset');
 });
 //Admin
 Route::group(['prefix' => 'admin', 'as' => 'admin::', 'middleware' => ['auth','auth.admin:']], function(){
@@ -49,7 +58,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'middleware' => ['auth','a
     Route::resource('events', 'EventsController', ['except' => 'show']);   
     Route::resource('halls',  'HallsController', ['except' => 'show']);
     Route::resource('users',  'UsersController', ['except' => 'show']);
+    Route::get('get_admins', ['as' =>'admins', 'uses' => 'HallsController@getAdmins']);
     Route::get('/', ['as' => 'root', 'uses' => 'AdminPagesController@root']);  
+    Route::post('registration', ['as' => 'admin_pages.registrations', 'uses' => 'AdminPagesController@registrations']);
+    Route::get('registration', ['as' => 'admin_pages.registrations', 'uses' => 'AdminPagesController@registrations']);
    
 });
 

@@ -3,10 +3,8 @@
 <br>
 <br>
 <br>
-<br>
-<br>
   <div class="row">
-        <div class="col offset-m2 m8 s12">
+        <div class="col offset-m3 m6 s4">
           @include('partials.error')
             <div class="card z-depth-2 rounded-box">
                 <div class="card-content">
@@ -33,6 +31,9 @@
                                 {!! Form::checkbox('remember', true, 1, ['id' => 'remember']) !!}
                                 {!! Form::label('remember', 'Remember Me!') !!}
                             </div>
+                        </div>
+                        <div class="right">
+                        {{ link_to_route('password.request', 'Forget Password?') }}
                         </div>
                         <div class="row">
                             <div class="col s12">

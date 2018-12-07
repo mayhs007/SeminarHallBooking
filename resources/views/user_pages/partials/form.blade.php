@@ -19,8 +19,7 @@
         }
         ?>
     <div class="col s12 input-field">
-                       
-        {!! Form::select('event_id', $event_list) !!}
+        {!! Form::select('event_id', $event_list)!!}
     </div>
 </div>
 <div class="row">
@@ -66,10 +65,13 @@
         {!! Form::label('laser_pointer-yes','laser_pointer') !!}
     </div>
 </div>
-
 <div class="input-field">
-    {!! Form::label('date_of_event') !!}
-    {!! Form::text('date_of_event','',array('class'=>'datepicker')) !!}                                              
+    {!! Form::label('from_date') !!}
+    {!! Form::text('from_date','',array('class'=>'datepicker')) !!}                                              
+</div>
+<div class="input-field">
+    {!! Form::label('to_date') !!}
+    {!! Form::text('to_date','',array('class'=>'datepicker')) !!}                                              
 </div>
 <div class="input-field">
     {!! Form::label('start_time') !!}
@@ -77,8 +79,7 @@
 </div>
 <div class="input-field">
     {!! Form::label('end_time') !!}
-    {!! Form::text('end_time','',array('class'=>'timepicker')) !!}
-                                             
+    {!! Form::text('end_time','',array('class'=>'timepicker')) !!}                                       
 </div>
 <div class="input-field">
     {!! Form::submit('Submit', ['class' => 'btn green waves-effect waves-light']) !!}

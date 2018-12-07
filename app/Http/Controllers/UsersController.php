@@ -33,11 +33,14 @@ class UsersController extends Controller
         $user->email = $inputs['email'];
         $user->roll_no = $inputs['roll_no'];
         $user->password = bcrypt(empty($inputs['password'])?'test':$inputs['password']);
-        $user->type = 'admin';
+        $user->type =$inputs['type'];
         $user->save();
-        $roles = Role::all()->whereIn('id', $inputs['roles']);
-        foreach($roles as $role){
-            $user->roles()->save($role);
+        if(isset($POST['roles']))
+        {
+            $roles = Role::all()->whereIn('id', $inputs['roles']);
+            foreach($roles as $role){
+                $user->roles()->save($role);
+            }
         }
         Session::flash('success', 'The user was created!');
         return redirect()->route('admin::users.create');
@@ -53,10 +56,14 @@ class UsersController extends Controller
             'type' => 'admin'
         ]);
         $user->roles()->detach();
-        $roles = Role::all()->whereIn('id', $inputs['roles']);
-        foreach($roles as $role){
-            $user->roles()->save($role);
+        if(isset($POST['roles']))
+        {
+            $roles = Role::all()->whereIn('id', $inputs['roles']);
+            foreach($roles as $role){
+                $user->roles()->save($role);
+            }
         }
+       
         Session::flash('success', 'The user was updated!');
         return redirect()->route('admin::users.index');
     }

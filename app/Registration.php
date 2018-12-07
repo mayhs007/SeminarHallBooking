@@ -17,4 +17,9 @@ class Registration extends Model
     {
         return $this->belongsTo('App\Hall','hall_id');
     }
+    function user()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
+   
 }

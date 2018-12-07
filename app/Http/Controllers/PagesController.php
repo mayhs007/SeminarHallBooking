@@ -8,6 +8,11 @@ use App\Event;
 use Auth;
 use Session;
 use App\Registration;
+use Mail;
+use App\Club;
+use App\User;
+use App\Mail\RegistrationNotification;
+use App\Mail\WaitingNotification;
 class PagesController extends Controller
 {
     //
@@ -30,60 +35,93 @@ class PagesController extends Controller
         $inputs = $request->all();
         $user=Auth::user();
         $registration=new Registration();
-        $date=date_create($inputs['date_of_event']);
-        $date=date_format($date, 'Y-m-d');
+        
+        $from_date=date_create($inputs['from_date']);
+        $from_date=date_format($from_date, 'Y-m-d');
+        
+        
+        
         $start_time=date_create($inputs['start_time']);
         $start_time=date_format($start_time, 'H:i:s');
+        
         $end_time=date_create($inputs['end_time']);
         $end_time=date_format($end_time, 'H:i:s');
-        $registreds=Registration::all()->where('hall_id',$inputs['hall_id'])
-        ->where('date_of_event',$date)
-        ->where('start_time',$start_time)
-        ->where('end_time',$end_time);
-        $event=Event::findOrFail($inputs['event_id']);
-        $registres=Registration::all()
-        ->where('date_of_event',$date)
-        ->where('start_time',$start_time)
-        ->where('end_time',$end_time);
-        $current_time=date('H:i:s');
-       // $current_time=date_format($current,'H:i:s');
-            //$current_time=date_format($current_time, 'H:i:s'
-           
-        foreach($registres as $registred)
-        {
-            if($registred->user_id == $user->id && $registred->status=='Registered')
-            {
-                Session::flash('success', 'YOUR BOOKING HAS ALREADY BEEN MADE!');
-                return view('user_pages.book'); 
-            }
-        }
         
-        foreach($registreds as $registred)
-        {    
-            if($registred->user_id == $user->id)
-            {
-                Session::flash('success', 'YOUR BOOKING HAS ALREADY BEEN MADE!');
-                return view('user_pages.book'); 
-            }
+        $event=Event::findOrFail($inputs['event_id']);
+        $hall=Hall::findOrFail($inputs['hall_id']);
+        $club=Club::findOrFail($inputs['club_id']);
+        if(isset($_POST['to_date']))
+        {
+            $to_date=date_create($inputs['to_date']);
+            $to_date=date_format($to_date, 'Y-m-d');
+            $registration->to_date= $to_date;
+            $registrations=Registration::all()->where('hall_id',$inputs['hall_id'])
+            ->where('from_date',$from_date)
+            ->where('to_date',$to_date);
         }
-        foreach($registreds as $registred)
+        else
+        {   
+            $registration->to_date=$from_date;
+            $registrations=Registration::all()->where('hall_id',$inputs['hall_id'])
+            ->where('from_date',$from_date)
+            ->where('to_date',$from_date);
+        }
+        foreach($registrations as $registered)
         {       
-            
-            
-            if($registred->event->priority > $event->priority)
+            if($registered->user_id == $user->id && $registered->status=='Registered')
             {
-                $registred->status='Waiting';
-                $registred->save();
+                if($registered->start_time == $start_time && $registration->end_time == $end_time)
+                {
+                    Session::flash('success', 'YOUR BOOKING HAS ALREADY BEEN MADE!');
+                    return view('user_pages.book'); 
+                }
+            }
+            $s_time = date("H:i:s", strtotime($registered->start_time));
+            $e_time = date("H:i:s", strtotime($registered->end_time));
+            
+            {
+            
+            }
+            if($registered->event->priority > $event->priority)
+            {
+                $registered->status='Waiting';
+                $registered_user=User::findorFail( $registered->user_id);
+                $registered_event=Event::findOrFail(  $registered->event_id);
+                $registered_hall=Hall::findOrFail( $registered->hall_id);
+                $registered_club=Club::findOrFail( $registered->club_id);
+                $registered_from_date= $registered->from_date;
+                $registered_to_date= $registered->to_date;
+                $registered_start_time= $registered->start_time;
+                $registered_end_time= $registered->end_time;
+                Mail::to($registered_user->email)->send(new WaitingNotification($registered_user,$registered_event,$registered_hall,$registered_club,$registered_from_date,$registered_to_date, $registered_start_time, $registered_end_time));
+                $registered->save();
             }
             else
-            {
-                $registration->status='Waiting';
-                $count=1;
+            {   if($start_time >= $s_time || $end_time <= $e_time)
+                {
+                    $registration->status='Waiting';
+                    $count=1;
+                }
+                else
+                {
+                    $registration->status='Waiting';
+                    $count=1;
+                }
+               
             }
-            if($registred->event->priority == $event->priority)
+            if( $registered->event->priority == $event->priority)
             {
-                $registration->status='Waiting';
-                $count=1;
+                if($start_time >= $s_time || $end_time <= $e_time)
+                {
+                    $registration->status='Waiting';
+                    $count=1;
+                }
+                else
+                {
+                    $registration->status='Waiting';
+                    $count=1;
+                }
+               
             }
         }
         $registration->user_id=$user->id;
@@ -147,7 +185,7 @@ class PagesController extends Controller
         {
             $registration->laser_pointer=false;
         }
-        $registration->date_of_event=$date;
+        $registration->from_date=$from_date;
         $registration->start_time=$inputs['start_time'];
         $registration->end_time=$inputs['end_time'];
         if($count!=1)
@@ -156,6 +194,7 @@ class PagesController extends Controller
         }
         $registration->save();
         Session::flash('success', 'YOUR BOOKING HAS BEEN MADE!');
+        Mail::to($user->email)->send(new RegistrationNotification($user,$event,$hall,$club,$from_date,$to_date,$start_time,$end_time, $registration->status));
         return view('user_pages.book');   
     }
     function book()
@@ -166,11 +205,13 @@ class PagesController extends Controller
     {
         $inputs=$request->all();
         $registration=Registration::findOrFail($inputs['id']);
+        $hall=$registration->hall_id;
         $registereds=Registration::all()->where('hall_id',$registration->hall_id)
         ->where('date_of_event',$registration->date_of_event)
         ->where('start_time',$registration->start_time)
         ->where('end_time',$registration->end_time);
-        $registration->delete();
+        $registrations=Registration::all()->where('hall_id',$hall);
+        $registration->delete();   
         $registrations=Registration::all()->where('user_id',Auth::user()->id);
         return view('user_pages.bookings')->with('registrations',$registrations);
     }
@@ -178,5 +219,23 @@ class PagesController extends Controller
     {
         $registrations=Registration::all()->where('user_id',Auth::user()->id);
         return view('user_pages.bookings')->with('registrations',$registrations);
+    }
+    function register_edit(Request $request)
+    {
+        $inputs=$request->all();
+        $registrations=Registration::findOrFail($inputs['id']);
+        return view('user_pages.book_edit')->with('registrations',$registrations);
+
+    }
+    function suggestion(Request $request)
+    {
+        $registrations=Registration::findOrFail($inputs['id']);
+    }
+    function registration(Request $request)
+    {
+        $inputs=$request->all();
+        $registrations=Registration::all()->where('hall_id',$inputs['id']);
+        $registration_count=$registrations->count();
+        return view('user_pages.registration')->with('registrations',$registrations)->with('registration_count',$registration_count);
     }
 }

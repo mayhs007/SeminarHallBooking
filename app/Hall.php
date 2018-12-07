@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Hall extends Model
 {
     //
+   
     protected $fillable = ['name', 'location','capacity','image','ac','podium_mike','video_projector','mike_with_card','cordless_hand_mike','cordless_collar_mike','laser_pointer'];
     protected $image_path = '/images/events/';
     function getQualifiedName(){
@@ -24,4 +25,8 @@ class Hall extends Model
     {
         return $this->hasMany('App\Registration');
     }
+    function organizers(){
+        return $this->belongsToMany('App\User', 'incharges');        
+    }
+    
 }
